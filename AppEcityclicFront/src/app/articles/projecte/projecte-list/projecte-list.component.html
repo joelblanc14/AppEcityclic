@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="projecte-list">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Projectes de l'empresa {{ empresaId }}</h2>
+      <button class="btn btn-primary sm-2" [routerLink]="['/empresa', empresaId, 'projecte', 'create']">Crear un nou projecte</button>
+    </div>
+
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Estat</th>
+          <th>Descripció</th>
+          <th>Data inici</th>
+          <th>Data fi</th>
+          <th>Accions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projecte of projectes">
+          <td>{{ projecte.projecteId || 'ID no disponible'}}</td>
+          <td>{{ projecte.nom }}</td>
+          <td>{{ projecte.estat }}</td>
+          <td>{{ projecte.descripcio }}</td>
+          <td>{{ projecte.dataInici | date:'dd/MM/yyy hh:mm a'}}</td>
+          <td>{{ projecte.dataFi ? (projecte.dataFi |date:'dd/MM/yyy hh:mm a') : 'No acabada'}}</td>
+          <td>
+            <button class="btn btn-secondary me-2" [routerLink]="['/empresa', empresaId, 'projecte', 'update', projecte.projecteId]">Actualitzar</button>
+            <button class="btn btn-primary me-2" [routerLink]="['/empresa', empresaId, 'projecte', projecte.projecteId, 'tasques']">Tasques</button>
+            <button class="btn btn-primary me-2" [routerLink]="['/empresa', empresaId, 'projecte', projecte.projecteId, 'client']">Clients</button>
+            <button class="btn btn-danger" (click)="deleteProject(projecte.projecteId)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

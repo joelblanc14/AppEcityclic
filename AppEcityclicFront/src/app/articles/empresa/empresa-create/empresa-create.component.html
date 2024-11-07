@@ -1,0 +1,26 @@
+<div class="container mt-5 form">
+  <h2>Crear Nova Empresa</h2>
+  <div class="form-group">
+    <form [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
+      <label for="nom">Nom:</label>
+      <input id="nom" class="form-control" formControlName="nom" required />
+      <div *ngIf="empresaForm.get('nom')?.invalid && (empresaForm.get('nom')?.touched || empresaForm.get('nom')?.dirty)">
+        <small class="text-danger">El nom és obligatori.</small>
+      </div>
+
+      <label for="adreca">Adreça:</label>
+      <input id="adreca" class="form-control" formControlName="adreca" required />
+      <div *ngIf="empresaForm.get('adreca')?.invalid && (empresaForm.get('adreca')?.touched || empresaForm.get('adreca')?.dirty)">
+        <small class="text-danger">L'adreça és obligatoria.</small>
+      </div>
+
+      <label for="cif">CIF:</label>
+      <input id="cif" class="form-control" formControlName="cif" required />
+      <div *ngIf="empresaForm.get('cif')?.invalid && (empresaForm.get('cif')?.touched || empresaForm.get('cif')?.dirty)">
+        <small class="text-danger">El CIF és obligatori.</small>
+      </div>
+      <button class="btn btn-primary mt-2" type="submit" [disabled]="empresaForm.invalid">Crear Empresa</button>
+      <button class="btn btn-secondary  mt-2 ms-2" [routerLink]="['/empresaes']">Cancel·lar</button>
+    </form>
+  </div>
+</div>

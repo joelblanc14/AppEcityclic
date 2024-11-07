@@ -1,0 +1,30 @@
+<div class="container mt-5 form">
+  <h2>Crear un nou client per al projecte {{ projecteId }}</h2>
+  <div class="form-group">
+    <form [formGroup]="clientsForm" (ngSubmit)="onSubmit()">
+      <label for="nom">Nom:</label>
+      <input id="nom" class="form-control" formControlName="nom" required>
+      <div *ngIf="clientsForm.get('nom')?.invalid && (clientsForm.get('nom')?.touched || clientsForm.get('nom')?.dirty)">
+        <small class="text-danger">El nom és obligatori.</small>
+      </div>
+
+      <label for="email">Email:</label>
+      <input id="email" class="form-control" formControlName="email" required>
+      <div *ngIf="clientsForm.get('email')?.hasError('required') && (clientsForm.get('email')?.touched || clientsForm.get('email')?.dirty)">
+        <small class="text-danger">L'email és obligatori.</small>
+      </div>
+      <div *ngIf="clientsForm.get('email')?.hasError('email') && clientsForm.get('email')?.dirty">
+        <small class="text-danger">L'email no és vàlid.</small>
+      </div>
+
+      <label for="adreca">Adreça:</label>
+      <input id="adreca" class="form-control" formControlName="adreca" required>
+      <div *ngIf="clientsForm.get('adreca')?.invalid && (clientsForm.get('adreca')?.touched || clientsForm.get('adreca')?.dirty)">
+        <small class="text-danger">L'adreça és obligatoria.</small>
+      </div>
+
+      <button class="btn btn-primary mt-2" type="submit" [disabled]="clientsForm.invalid">Crear nou client</button>
+      <button class="btn btn-secondary mt-2 ms-2" [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'client']">Cancel·lar</button>
+    </form>
+  </div>
+</div>

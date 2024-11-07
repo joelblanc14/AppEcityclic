@@ -1,0 +1,33 @@
+<div class="container mt-5 form">
+  <h2>Actualitzar treballador</h2>
+  <div class="form-group">
+    <form [formGroup]="treballadorForm" (ngSubmit)="ngOnSubmit()">
+      <label for="nom">Nom:</label>
+      <input id="nom" class="form-control" formControlName="nom" required />
+      <div *ngIf="treballadorForm.get('nom')?.invalid && (treballadorForm.get('nom')?.touched || treballadorForm.get('nom')?.dirty)">
+        <small class="text-danger">El nom és obligatori.</small>
+      </div>
+
+      <label for="posicio">Posició:</label>
+      <input id="posicio" class="form-control" formControlName="posicio" required>
+      <div *ngIf="treballadorForm.get('posicio')?.invalid && (treballadorForm.get('posicio')?.touched || treballadorForm.get('posicio')?.dirty)">
+        <small class="text-danger">La posició és obligatoria.</small>
+      </div>
+      <label for="salari">Salari:</label>
+      <input id="salari" class="form-control" formControlName="salari" required>
+      <div *ngIf="treballadorForm.get('salari')?.invalid && (treballadorForm.get('salari')?.touched || treballadorForm.get('salari')?.dirty)">
+        <small class="text-danger">El salari és obligatori.</small>
+      </div>
+      <label for="email">Email:</label>
+      <input id="email" class="form-control" formControlName="email" required>
+      <div *ngIf="treballadorForm.get('email')?.hasError('required') && (treballadorForm.get('email')?.touched || treballadorForm.get('email')?.dirty)">
+        <small class="text-danger">L'email és obligatori.</small>
+      </div>
+      <div *ngIf="treballadorForm.get('email')?.hasError('email') && treballadorForm.get('email')?.dirty">
+        <small class="text-danger">L'email no és vàlid.</small>
+      </div>
+      <button class="btn btn-primary mt-2" type="submit" [disabled]="treballadorForm.invalid">Crear nou treballador</button>
+      <button class="btn btn-secondary mt-2 ms-2" [routerLink]="['/empresa', empresaId, 'treballadors']">Cancel·lar</button>
+    </form>
+  </div>
+</div>

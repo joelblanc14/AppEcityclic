@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <div class="client-list">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Llistat de Clients del Projecte</h2>
+      <button class="btn btn-primary " [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'client', 'create']">Afegir Client</button>
+    </div>
+
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Adreça</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.clientId }}</td>
+          <td>{{ client.nom }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.adreca }}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'client', 'update', client.clientId]">Actualitzar dades</button>
+            <button class="btn btn-danger btn-sm ms-2" (click)="deleteClient(client.clientId)">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
