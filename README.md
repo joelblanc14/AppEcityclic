@@ -23,7 +23,7 @@ Això iniciarà el servidor en `http://localhost:8080`.
 ```bash
 cd AppEcityclic/AppEcityclicFront
 ```
-2. Instalar les dependències
+2. Instalar les dependències (solament caldrà executar-ho una vegada)
 ```bash
 npm install
 ```
