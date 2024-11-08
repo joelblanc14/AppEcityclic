@@ -25,10 +25,6 @@
       <div class="mb-3">
         <label for="descripcio">Descripció:</label>
         <textarea id="descripcio" class="form-control" formControlName="descripcio" required></textarea>
-        <div
-          *ngIf="tascaForm.get('descripcio')?.invalid && (tascaForm.get('descripcio')?.touched || tascaForm.get('descripcio')?.dirty)">
-          <small class="text-danger">La descripció és obligatòria.</small>
-        </div>
       </div>
 
       <button class="btn btn-primary mt-2" type="submit">Actualitzar Tasca</button>
