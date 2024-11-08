@@ -2,35 +2,37 @@
   <h2>Crea una nova Tasca</h2>
 
   <form [formGroup]="tascaForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="nom" class="form-label">Nom</label>
-      <input type="text" id="nom" formControlName="nom" class="form-control" />
-      <div *ngIf="tascaForm.get('nom')?.invalid && (tascaForm.get('nom')?.touched || tascaForm.get('nom')?.dirty)">
-        <small class="text-danger">El nom és obligatori.</small>
+    <div class="form-group">
+      <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" id="nom" formControlName="nom" class="form-control" />
+        <div *ngIf="tascaForm.get('nom')?.invalid && (tascaForm.get('nom')?.touched || tascaForm.get('nom')?.dirty)">
+          <small class="text-danger">El nom és obligatori.</small>
+        </div>
       </div>
-    </div>
 
-    <div class="mb-3">
-      <label for="estat" class="form-label">Estat</label>
-      <select id="estat" formControlName="estat" class="form-select">
-        <option value="">Selecciona un estat</option>
-        <option value="pendent">Pendent</option>
-        <option value="complet">Complet</option>
-      </select>
-      <div *ngIf="tascaForm.get('estat')?.invalid && (tascaForm.get('estat')?.touched || tascaForm.get('estat')?.dirty)">
-        <small class="text-danger">L'estat és obligatori.</small>
+      <div class="mb-3">
+        <label for="estat" class="form-label">Estat</label>
+        <select id="estat" formControlName="estat" class="form-select">
+          <option value="">Selecciona un estat</option>
+          <option value="pendent">Pendent</option>
+          <option value="complet">Complet</option>
+        </select>
+        <div *ngIf="tascaForm.get('estat')?.invalid && (tascaForm.get('estat')?.touched || tascaForm.get('estat')?.dirty)">
+          <small class="text-danger">L'estat és obligatori.</small>
+        </div>
       </div>
-    </div>
 
-    <div class="mb-3">
-      <label for="descripcio" class="form-label">Descripció</label>
-      <textarea id="descripcio" formControlName="descripcio" class="form-control" rows="3"></textarea>
-      <div *ngIf="tascaForm.get('descripcio')?.invalid && (tascaForm.get('descripcio')?.touched || tascaForm.get('descripcio')?.dirty)">
-        <small class="text-danger">La descripció és obligatòria.</small>
+      <div class="mb-3">
+        <label for="descripcio" class="form-label">Descripció</label>
+        <textarea id="descripcio" formControlName="descripcio" class="form-control" rows="3"></textarea>
+        <div *ngIf="tascaForm.get('descripcio')?.invalid && (tascaForm.get('descripcio')?.touched || tascaForm.get('descripcio')?.dirty)">
+          <small class="text-danger">La descripció és obligatòria.</small>
+        </div>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="tascaForm.invalid">Crear Tasca</button>
-    <button type="button" class="btn btn-secondary ms-2" [routerLink]="(['/empresa', empresaId, 'projecte', projecteId, 'tasques'])">Cancel·lar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="tascaForm.invalid">Crear Tasca</button>
+      <button type="button" class="btn btn-secondary ms-2" [routerLink]="(['/empresa', empresaId, 'projecte', projecteId, 'tasques'])">Cancel·lar</button>
+    </div>
   </form>
 </div>

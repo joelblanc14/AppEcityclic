@@ -5,7 +5,7 @@ Aquest projecte és una aplicació composada per dos components principals:
 
 ## Requisits prèvis
 - **Java 21** o superior per a executar el Backend amb Spring Boot
-- **Node.js 20** o superior, juntament amb  **Angular CLI**, per a executar el frontend
+- **Node.js 20** o superior, juntament amb **Angular CLI**, per a executar el frontend
 
 ## Instruccions per a l'execució
 ### Executar el Backend (Spring Boot)
