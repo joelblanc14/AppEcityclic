@@ -37,14 +37,18 @@ export class TreballadorListComponent implements OnInit{
   }
 
   deleteTreballador(id: number): void {
-    this.treballadorService.deleteTreballador(this.empresaId ,id).subscribe(
-      () => {
+    const confirmed = window.confirm('Estàs segur que vols borrar aquest treballador?');
+
+    if (confirmed) {
+      this.treballadorService.deleteTreballador(this.empresaId ,id).subscribe(
+        () => {
         this.treballadors = this.treballadors.filter(t => t.treballadorId !== id);
         console.log('Treballador eliminat correctament!');
       },
       (error) => {
         console.log('Error al eliminar treballador', error);
-      }
-    );
+        }
+      );
+    }
   }
 }

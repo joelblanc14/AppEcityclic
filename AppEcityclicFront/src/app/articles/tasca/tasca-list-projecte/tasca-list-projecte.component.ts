@@ -35,10 +35,14 @@ export class TascaListProjecteComponent implements OnInit {
   }
 
   deleteTasca(tascaId: number): void {
+    const confirmed = window.confirm('Estàs segur que vols borrar aquesta tasca?');
+
+    if (confirmed) {
     if (confirm('Estàs segur que vols borrar aquesta tasca?')) {
       this.tascaService.deleteTasca(this.empresaId, this.projecteId, tascaId).subscribe(() => {
         this.tasques = this.tasques.filter(tasca => tasca.tascaId !== tascaId);
-      });
+        });
+      }
     }
   }
 }

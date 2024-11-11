@@ -15,12 +15,12 @@ public class DataInitializer {
             Empresa empresa1 = new Empresa();
             empresa1.setNom("Empresa 1");
             empresa1.setAdreca("Dirección 1");
-            empresa1.setCif("CIF123");
+            empresa1.setCif("N1234567J");
 
             Empresa empresa2 = new Empresa();
             empresa2.setNom("Empresa 2");
             empresa2.setAdreca("Dirección 2");
-            empresa2.setCif("CIF456");
+            empresa2.setCif("W1234567H");
 
             empresaService.save(empresa1);
             empresaService.save(empresa2);

@@ -29,8 +29,12 @@ export class EmpresaListComponent implements OnInit{
   }
 
   deleteEmpresa(id: number): void {
-    this.empresaService.deleteEmpresa(id).subscribe(() => {
-      this.empreses = this.empreses.filter(empresa => empresa.empresaId !== id);
-    });
+    const confirmed = window.confirm('Estàs segur que vols borrar aquesta empresa?');
+
+    if (confirmed) {
+      this.empresaService.deleteEmpresa(id).subscribe(() => {
+        this.empreses = this.empreses.filter(empresa => empresa.empresaId !== id);
+      });
+    }
   }
 }

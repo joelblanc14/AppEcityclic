@@ -40,7 +40,9 @@ export class ProjecteListComponent implements OnInit {
   }
 
   deleteProject(projecteId: number): void {
-    if (confirm('Estàs segur que vols eliminar aquest projecte?')) {
+    const confirmed = window.confirm('Estàs segur que vols eliminar aquest projecte?');
+
+    if (confirmed) {
       this.projecteService.deleteProjecte(this.empresaId, projecteId).subscribe(
         () => {
           console.log('Projecte eliminat correctament');

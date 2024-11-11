@@ -40,8 +40,11 @@ export class ClientListComponent  implements OnInit{
     );
     }
     deleteClient(id: number): void {
-      this.clientService.deleteClient(this.empresaId, id).subscribe(
-        () => {
+      const confirmed = window.confirm('Estàs segur que vols borrar aquest client?');
+
+      if (confirmed) {
+        this.clientService.deleteClient(this.empresaId, id).subscribe(
+          () => {
           this.clients = this.clients.filter(client => client.clientId !== id);
           this.loadClients();
           console.log('Client eliminat correctament!');
@@ -49,6 +52,7 @@ export class ClientListComponent  implements OnInit{
         (error: any) => {
           console.error('Error al eliminar client', error);
         }
-      );
+        );
+      }
     }
 }
