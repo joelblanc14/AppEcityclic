@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-  {path: 'empreses',
+  {path: 'empresa',
     loadComponent: () => import('./articles/empresa/empresa-list/empresa-list.component').then(m => m.EmpresaListComponent)
   },
   {path: 'empresa/create',
@@ -50,5 +50,5 @@ export const routes: Routes = [
   {path: 'empresa/:empresaId/projecte/:projecteId/client/update/:clientId',
     loadComponent: () => import('./articles/client-folder/client-update/client-update.component').then(m => m.ClientUpdateComponent)
   },
-  {path: '**', redirectTo: 'empreses', pathMatch: 'full'},
+  {path: '**', redirectTo: 'empresa', pathMatch: 'full'},
 ];

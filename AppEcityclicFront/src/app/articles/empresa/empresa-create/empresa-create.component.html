@@ -16,8 +16,9 @@
 
       <label for="cif">CIF:</label>
       <input id="cif" class="form-control" formControlName="cif" required />
-      <div *ngIf="empresaForm.get('cif')?.invalid && (empresaForm.get('cif')?.touched || empresaForm.get('cif')?.dirty)">
-        <small class="text-danger">El CIF és obligatori.</small>
+      <div *ngIf="empresaForm.get('cif')?.touched && (empresaForm.get('cif')?.dirty || empresaForm.get('cif')?.hasError('required'))">
+        <small class="text-danger" *ngIf="empresaForm.get('cif')?.hasError('required')">El CIF és obligatori.</small>
+        <small class="text-danger" *ngIf="empresaForm.get('cif')?.hasError('cifInvalid')">El CIF no té el format correcte</small>
       </div>
       <button class="btn btn-primary mt-2" type="submit" [disabled]="empresaForm.invalid">Crear Empresa</button>
       <button class="btn btn-secondary  mt-2 ms-2" [routerLink]="['/empresaes']">Cancel·lar</button>

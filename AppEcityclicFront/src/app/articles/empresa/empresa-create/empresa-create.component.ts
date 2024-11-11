@@ -4,6 +4,7 @@ import { EmpresaService } from '../../../services/empresa.service';
 import { Router, RouterLink } from '@angular/router';
 import { Empresa } from '../../../models/empresa.interface';
 import { CommonModule } from '@angular/common';
+import { cifValidator } from '../../../shared/validators/cif.validator';
 @Component({
   selector: 'app-empresa-create',
   standalone: true,
@@ -22,7 +23,7 @@ export class EmpresaCreateComponent {
     this.empresaForm = this.fb.group({
       nom: ['', Validators.required],
       adreca: ['', Validators.required],
-      cif: ['', Validators.required]
+      cif: ['', [Validators.required, cifValidator()]]
     });
   }
 
