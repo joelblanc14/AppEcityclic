@@ -3,6 +3,8 @@ import { Projecte } from '../../../models/projecte.interface';
 import { ProjecteService } from '../../../services/projecte.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-projecte-list',
@@ -19,7 +21,8 @@ export class ProjecteListComponent implements OnInit {
   constructor(
     private projecteService: ProjecteService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -39,19 +42,27 @@ export class ProjecteListComponent implements OnInit {
     );
   }
 
-  deleteProject(projecteId: number): void {
-    const confirmed = window.confirm('Estàs segur que vols eliminar aquest projecte?');
+  openDeleteModal(id: number) {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      data: { message: 'Estàs segur que vols eliminar aquest projecte?' }
+    });
 
-    if (confirmed) {
-      this.projecteService.deleteProjecte(this.empresaId, projecteId).subscribe(
-        () => {
-          console.log('Projecte eliminat correctament');
-          this.getProjectes();
-        },
-        (error) => {
-          console.error('Error borrant el projecte: ', error);
-        }
-      );
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteProject(id);
+      }
+    });
+  }
+
+  deleteProject(projecteId: number): void {
+    this.projecteService.deleteProjecte(this.empresaId, projecteId).subscribe(
+      () => {
+        console.log('Projecte eliminat correctament');
+        this.getProjectes();
+      },
+      (error) => {
+        console.error('Error borrant el projecte: ', error);
+      }
+    );
   }
 }

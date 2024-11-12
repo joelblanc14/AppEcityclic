@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TreballadorService } from '../../../services/treballador.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-treballador-list',
@@ -17,7 +19,7 @@ export class TreballadorListComponent implements OnInit{
   public treballadors: Treballador[] = [];
   public empresaId!: number;
 
-  constructor(private treballadorService: TreballadorService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private treballadorService: TreballadorService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
@@ -36,19 +38,27 @@ export class TreballadorListComponent implements OnInit{
     );
   }
 
-  deleteTreballador(id: number): void {
-    const confirmed = window.confirm('Estàs segur que vols borrar aquest treballador?');
+  openDeleteModal(id: number): void {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      data: { message: 'Estàs segur que vols eliminar aquest treballador?' }
+    });
 
-    if (confirmed) {
-      this.treballadorService.deleteTreballador(this.empresaId ,id).subscribe(
-        () => {
-        this.treballadors = this.treballadors.filter(t => t.treballadorId !== id);
-        console.log('Treballador eliminat correctament!');
-      },
-      (error) => {
-        console.log('Error al eliminar treballador', error);
-        }
-      );
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteTreballador(id);
+      }
+    });
+  }
+
+  deleteTreballador(id: number): void {
+    this.treballadorService.deleteTreballador(this.empresaId ,id).subscribe(
+      () => {
+      this.treballadors = this.treballadors.filter(t => t.treballadorId !== id);
+      console.log('Treballador eliminat correctament!');
+    },
+    (error) => {
+      console.log('Error al eliminar treballador', error);
+      }
+    );
   }
 }

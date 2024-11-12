@@ -1,0 +1,8 @@
+<h2 mat-dialog-title align="center">TOT EL RELACIONAT TAMBÉ S'ELIMINARÀ</h2>
+<mat-dialog-content>
+  <p>{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button class="btn btn-secondary me-2" mat-button (click)="onCancel()">Cancelar</button>
+  <button class="btn btn-danger" mat-button (click)="onConfirmDelete()">Eliminar</button>
+</mat-dialog-actions>

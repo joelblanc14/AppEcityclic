@@ -22,7 +22,7 @@
           <td>{{ client.adreca }}</td>
           <td>
             <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'client', 'update', client.clientId]">Actualitzar dades</button>
-            <button class="btn btn-danger btn-sm ms-2" (click)="deleteClient(client.clientId)">Borrar</button>
+            <button class="btn btn-danger btn-sm ms-2" (click)="openDeleteModal(client.clientId)">Borrar</button>
           </td>
         </tr>
       </tbody>

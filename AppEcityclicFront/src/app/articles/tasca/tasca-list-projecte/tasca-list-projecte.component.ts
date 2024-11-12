@@ -3,6 +3,8 @@ import { TascaService } from '../../../services/tasca.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Tasca } from '../../../models/tasca.interface';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-tasca-list-projecte',
@@ -18,7 +20,8 @@ export class TascaListProjecteComponent implements OnInit {
 
   constructor(
     private tascaService: TascaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -34,15 +37,21 @@ export class TascaListProjecteComponent implements OnInit {
     });
   }
 
-  deleteTasca(tascaId: number): void {
-    const confirmed = window.confirm('Estàs segur que vols borrar aquesta tasca?');
+  openDeleteModal(id: number) {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      data: { message: 'Estàs segur que vols eliminar aquesta tasca?' }
+    });
 
-    if (confirmed) {
-    if (confirm('Estàs segur que vols borrar aquesta tasca?')) {
-      this.tascaService.deleteTasca(this.empresaId, this.projecteId, tascaId).subscribe(() => {
-        this.tasques = this.tasques.filter(tasca => tasca.tascaId !== tascaId);
-        });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteTasca(id);
       }
-    }
+    });
+  }
+
+  deleteTasca(tascaId: number): void {
+    this.tascaService.deleteTasca(this.empresaId, this.projecteId, tascaId).subscribe(() => {
+      this.tasques = this.tasques.filter(tasca => tasca.tascaId !== tascaId);
+    });
   }
 }

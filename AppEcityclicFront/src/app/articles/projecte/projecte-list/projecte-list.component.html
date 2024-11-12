@@ -29,7 +29,7 @@
             <button class="btn btn-secondary me-2" [routerLink]="['/empresa', empresaId, 'projecte', 'update', projecte.projecteId]">Actualitzar</button>
             <button class="btn btn-primary me-2" [routerLink]="['/empresa', empresaId, 'projecte', projecte.projecteId, 'tasques']">Tasques</button>
             <button class="btn btn-primary me-2" [routerLink]="['/empresa', empresaId, 'projecte', projecte.projecteId, 'client']">Clients</button>
-            <button class="btn btn-danger" (click)="deleteProject(projecte.projecteId)">Borrar</button>
+            <button class="btn btn-danger" (click)="openDeleteModal(projecte.projecteId)">Borrar</button>
           </td>
         </tr>
       </tbody>

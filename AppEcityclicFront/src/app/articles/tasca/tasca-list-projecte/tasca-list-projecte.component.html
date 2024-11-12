@@ -28,7 +28,7 @@
           <td>{{ tasca.dataFi ? (tasca.dataFi | date:'dd/MM/yyyy') : 'Encara no completada' }}</td>
           <td>
             <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'tasques', 'update', tasca.tascaId]">Actualitzar</button>
-            <button class="btn btn-danger btn-sm ms-2" (click)="deleteTasca(tasca.tascaId)">Borrar</button>
+            <button class="btn btn-danger btn-sm ms-2" (click)="openDeleteModal(tasca.tascaId)">Borrar</button>
           </td>
         </tr>
       </tbody>

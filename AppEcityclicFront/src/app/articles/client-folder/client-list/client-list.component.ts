@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Client } from '../../../models/client.interface';
 import { ClientService } from '../../../services/client.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-client-list',
@@ -19,7 +21,7 @@ export class ClientListComponent  implements OnInit{
     public empresaId: number = 0;
     public projecteId: number = 0;
 
-    constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute){}
+    constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog){}
 
 
     ngOnInit(): void {
@@ -37,13 +39,23 @@ export class ClientListComponent  implements OnInit{
         (error) => {
             console.error('Error fetching clients:', error);
         }
-    );
+      );
     }
-    deleteClient(id: number): void {
-      const confirmed = window.confirm('Estàs segur que vols borrar aquest client?');
 
-      if (confirmed) {
-        this.clientService.deleteClient(this.empresaId, id).subscribe(
+    openDeleteModal(id: number): void {
+      const dialogRef = this.dialog.open(DeleteModalComponent, {
+        data: { message: 'Estàs segur que vols eliminar aquest client?' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.deleteClient(id);
+        }
+      });
+    }
+
+    deleteClient(id: number): void {
+      this.clientService.deleteClient(this.empresaId, id).subscribe(
           () => {
           this.clients = this.clients.filter(client => client.clientId !== id);
           this.loadClients();
@@ -52,7 +64,6 @@ export class ClientListComponent  implements OnInit{
         (error: any) => {
           console.error('Error al eliminar client', error);
         }
-        );
-      }
+      );
     }
 }
