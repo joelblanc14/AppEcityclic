@@ -42,9 +42,12 @@ export class EmpresaListComponent implements OnInit {
     setTimeout(() => {
       this.dataTable = $('#empresaTable').DataTable({
         pageLength: 10,
-        order: [[0, 'asc']]
+        order: [[0, 'asc']], // L'element 0 és el ID de l'empresa
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ca.json' // URL de la llibreria de traducció en català
+        }
       });
-    }, 1);
+    }, 1); // 1ms per assegurar-nos que el DOM està completament carregat
   }
 
   openDeleteModal(id: number): void {
