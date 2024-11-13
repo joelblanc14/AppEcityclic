@@ -5,7 +5,7 @@
       <button class="btn btn-primary" [routerLink]="['/empresa/create']">Afegir nova empresa</button>
     </div>
 
-    <table class="table table-bordered table-striped text-center">
+    <table id="empresaTable" class="table table-bordered table-striped text-center">
       <thead>
         <tr>
           <th>ID</th>
@@ -22,7 +22,7 @@
           <td>{{ empresa.adreca }}</td>
           <td>{{ empresa.cif }}</td>
           <td>
-            <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa/update', empresa.empresaId]">Actualitzar</button>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa/edit', empresa.empresaId]">Actualitzar</button>
             <button class="btn btn-primary btn-sm ms-2" [routerLink]="['/empresa', empresa.empresaId, 'treballadors']">Veure Treballadors</button>
             <button class="btn btn-info btn-sm ms-2" [routerLink]="['/empresa', empresa.empresaId, 'projecte']">Veure Projectes</button>
             <button class="btn btn-danger btn-sm ms-2" (click)="openDeleteModal(empresa.empresaId)">Borrar</button>

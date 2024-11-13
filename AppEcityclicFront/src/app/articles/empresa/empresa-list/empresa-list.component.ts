@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Empresa } from '../../../models/empresa.interface';
 import { EmpresaService } from '../../../services/empresa.service';
 import { Router, RouterModule } from '@angular/router';
@@ -25,6 +25,7 @@ export class EmpresaListComponent implements OnInit{
     this.fetchEmpreses();
   }
 
+
   fetchEmpreses() {
     this.empresaService.getEmpreses().subscribe((data: Empresa[]) => {
       this.empreses = data.sort((a, b) => a.empresaId - b.empresaId);
@@ -32,6 +33,7 @@ export class EmpresaListComponent implements OnInit{
   }
   openDeleteModal(id: number): void {
     const dialogRef = this.dialog.open(DeleteModalComponent, {
+      width: 'auto',
       data: { message: 'Estàs segur que vols eliminar aquesta empresa?' }
     });
 

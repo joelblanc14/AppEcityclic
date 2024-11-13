@@ -10,7 +10,7 @@
         <tr>
           <th>ID</th>
           <th>Nom</th>
-          <th>Posicio</th>
+          <th>Posició</th>
           <th>Salari</th>
           <th>Email</th>
         </tr>
@@ -23,7 +23,7 @@
           <td>{{ treballador.salari }}</td>
           <td>{{ treballador.email }}</td>
           <td>
-            <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa', empresaId, 'treballadors', 'update', treballador.treballadorId]">Actualitzar dades</button>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/empresa', empresaId, 'treballadors', 'edit', treballador.treballadorId]">Actualitzar dades</button>
             <button class="btn btn-info btn-sm ms-2" [routerLink]="['/empresa', empresaId, 'treballador', treballador.treballadorId, 'tasques']">Veure tasques</button>
             <button class="btn btn-danger btn-sm ms-2" (click)="openDeleteModal(treballador.treballadorId)">Borrar</button>
           </td>
