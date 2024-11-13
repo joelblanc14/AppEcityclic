@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Empresa } from '../../../models/empresa.interface';
 import { EmpresaService } from '../../../services/empresa.service';
 import { Router, RouterModule } from '@angular/router';
@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-empresa-list',
@@ -14,23 +16,37 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './empresa-list.component.html',
   styleUrl: './empresa-list.component.css'
 })
-export class EmpresaListComponent implements OnInit{
+export class EmpresaListComponent implements OnInit {
 
   public empreses: Empresa[] = [];
   itemToDelete: number | null = null;
+  dataTable: any;
 
-  constructor(private empresaService : EmpresaService, private router: Router, private dialog: MatDialog){}
+  constructor(private empresaService: EmpresaService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.fetchEmpreses();
   }
 
-
   fetchEmpreses() {
     this.empresaService.getEmpreses().subscribe((data: Empresa[]) => {
       this.empreses = data.sort((a, b) => a.empresaId - b.empresaId);
+      this.initializeDataTable();
     });
   }
+
+  initializeDataTable() {
+    setTimeout(() => {
+      this.dataTable = $('#empresaTable').DataTable({
+        pageLength: 10,
+        order: [[0, 'asc']]
+      });
+    }, 1);
+  }
+
   openDeleteModal(id: number): void {
     const dialogRef = this.dialog.open(DeleteModalComponent, {
       width: 'auto',

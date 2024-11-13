@@ -6,6 +6,8 @@ import { Client } from '../../../models/client.interface';
 import { ClientService } from '../../../services/client.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-client-list',
@@ -20,6 +22,7 @@ export class ClientListComponent  implements OnInit{
     public clients: Client[] = [];
     public empresaId: number = 0;
     public projecteId: number = 0;
+    datatable: any;
 
     constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog){}
 
@@ -35,11 +38,21 @@ export class ClientListComponent  implements OnInit{
         (clients: Client[]) => {
             console.log('Clients received:', clients);
             this.clients = clients;
+            this.initializeDataTable();
         },
         (error) => {
             console.error('Error fetching clients:', error);
         }
       );
+    }
+
+    initializeDataTable(): void {
+      setTimeout(() => {
+        this.datatable = $('#clientTable').DataTable({
+          pageLength: 10,
+          order: [[0, 'asc']]
+        });
+      }, 1);
     }
 
     openDeleteModal(id: number): void {

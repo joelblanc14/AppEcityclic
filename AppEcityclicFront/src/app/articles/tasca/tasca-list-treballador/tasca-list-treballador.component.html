@@ -5,7 +5,7 @@
       <button class="btn btn-primary" [routerLink]="['/empresa', empresaId, 'treballadors']">Tornar a Treballadors</button>
     </div>
 
-    <table class="table table-bordered table-striped text-center">
+    <table id="tascaTable" class="table table-bordered table-striped text-center">
       <thead>
         <tr>
           <th>ID</th>
@@ -26,7 +26,6 @@
           <td>{{ tasca.dataInici | date:'dd/MM/yyyy' }}</td>
           <td>{{ tasca.dataFi ? (tasca.dataFi | date:'dd/MM/yyyy') : 'Encara no completada' }}</td>
           <td>
-
             <button class="btn btn-danger btn-sm ms-2">Borrar</button>
           </td>
         </tr>

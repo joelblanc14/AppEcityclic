@@ -6,6 +6,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TreballadorService } from '../../../services/treballador.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-treballador-list',
@@ -18,8 +20,13 @@ export class TreballadorListComponent implements OnInit{
 
   public treballadors: Treballador[] = [];
   public empresaId!: number;
+  datatable: any;
 
-  constructor(private treballadorService: TreballadorService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {}
+  constructor(private treballadorService: TreballadorService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
@@ -31,11 +38,21 @@ export class TreballadorListComponent implements OnInit{
     this.treballadorService.getTreballadorsByEmpresaId(this.empresaId).subscribe(
       (data: Treballador[]) => {
         this.treballadors = data;
+        this.initializeDataTable();
       },
       (error) => {
         console.error('Error al carregar treballadors', error);
       }
     );
+  }
+
+  initializeDataTable(): void {
+    setTimeout(() => {
+      this.datatable = $('#treballadorTable').DataTable({
+        pageLength: 10,
+        order: [[0, 'asc']]
+      });
+    }, 1);
   }
 
   openDeleteModal(id: number): void {

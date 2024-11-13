@@ -3,6 +3,8 @@ import { Tasca } from '../../../models/tasca.interface';
 import { TascaService } from '../../../services/tasca.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-tasca-list-treballador',
@@ -15,6 +17,7 @@ export class TascaListTreballadorComponent implements OnInit {
   tasques: Tasca[] = [];
   treballadorId!: number;
   empresaId!: number;
+  datatable: any;
 
   constructor(
     private tascaService: TascaService,
@@ -31,6 +34,16 @@ export class TascaListTreballadorComponent implements OnInit {
   getTasques(): void {
     this.tascaService.getTasquesByTreballadorId(this.empresaId, this.treballadorId).subscribe(tasques => {
       this.tasques = tasques;
+      this.initializeDataTable();
     });
+  }
+
+  initializeDataTable(): void {
+    setTimeout(() => {
+      this.datatable = $('#tascaTable').DataTable({
+        pageLength: 10,
+        order: [[0, 'asc']]
+      });
+    }, 1);
   }
 }

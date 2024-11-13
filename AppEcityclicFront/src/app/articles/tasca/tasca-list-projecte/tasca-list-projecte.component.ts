@@ -5,6 +5,8 @@ import { Tasca } from '../../../models/tasca.interface';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-tasca-list-projecte',
@@ -17,6 +19,7 @@ export class TascaListProjecteComponent implements OnInit {
   tasques: Tasca[] = [];
   projecteId!: number;
   empresaId!: number;
+  datatable: any;
 
   constructor(
     private tascaService: TascaService,
@@ -34,7 +37,17 @@ export class TascaListProjecteComponent implements OnInit {
   getTasques(): void {
     this.tascaService.getTasquesByProjecteId(this.empresaId, this.projecteId).subscribe(tasques => {
       this.tasques = tasques;
+      this.initializeDataTable();
     });
+  }
+
+  initializeDataTable(): void {
+    setTimeout(() => {
+      this.datatable = $('#tascaTable').DataTable({
+        pageLength: 10,
+        order: [[0, 'asc']]
+      });
+    }, 1);
   }
 
   openDeleteModal(id: number) {

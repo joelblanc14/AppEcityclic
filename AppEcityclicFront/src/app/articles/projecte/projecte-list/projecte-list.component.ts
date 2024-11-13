@@ -5,6 +5,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-projecte-list',
@@ -17,6 +19,7 @@ export class ProjecteListComponent implements OnInit {
 
   public empresaId!: number;
   public projectes: Projecte[] = [];
+  datatable: any;
 
   constructor(
     private projecteService: ProjecteService,
@@ -35,11 +38,21 @@ export class ProjecteListComponent implements OnInit {
       (data) => {
         console.log('Projectes recuperats:', data);
         this.projectes = data.sort((a, b) => a.projecteId - b.projecteId);
+        this.initializeDataTable();
       },
       (error) => {
         console.error('Error carregant els projectes!', error);
       }
     );
+  }
+
+  initializeDataTable(): void {
+    setTimeout(() => {
+      this.datatable = $('#projecteTable').DataTable({
+        pageLength: 10,
+        order: [[0, 'asc']]
+      });
+    }, 1);
   }
 
   openDeleteModal(id: number) {
