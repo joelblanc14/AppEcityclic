@@ -51,9 +51,6 @@ export class ClientListComponent  implements OnInit{
         this.datatable = $('#clientTable').DataTable({
           pageLength: 10,
           order: [[0, 'asc']],
-          language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ca.json'
-          }
         });
       }, 1);
     }

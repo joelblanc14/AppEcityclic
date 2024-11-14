@@ -45,10 +45,7 @@ export class TascaListProjecteComponent implements OnInit {
     setTimeout(() => {
       this.datatable = $('#tascaTable').DataTable({
         pageLength: 10,
-        order: [[0, 'asc']],
-        language: {
-          url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/ca.json'
-        }
+        order: [[0, 'asc']]
       });
     }, 1);
   }
