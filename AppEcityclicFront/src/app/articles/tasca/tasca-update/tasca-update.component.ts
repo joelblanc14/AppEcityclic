@@ -8,6 +8,7 @@ import { Projecte } from '../../../models/projecte.interface';
 import { TreballadorService } from '../../../services/treballador.service';
 import { ProjecteService } from '../../../services/projecte.service';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tasca-update',
@@ -27,7 +28,8 @@ export class TascaUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private tascaService: TascaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.tascaForm = this.fb.group({
       nom: [''],
@@ -54,9 +56,11 @@ export class TascaUpdateComponent implements OnInit {
         (tasca: Tasca) => {
           console.log('Tasca actualitzada amb èxit:', tasca);
           this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'tasques']);
+          this.openSnackBar('Tasca actualitzada correctament!', 'update-snackbar');
         },
         (error) => {
           console.error('Error actualitzant la tasca: ', error);
+          this.openSnackBar('Error actualitzant tasca', 'error-snackbar');
         }
       );
     } else {
@@ -66,6 +70,16 @@ export class TascaUpdateComponent implements OnInit {
       console.log('Estat:', this.tascaForm.get('estat')?.status);
       console.log('Treballador:', this.tascaForm.get('treballador')?.status);
       console.log('Projecte:', this.tascaForm.get('projecte')?.status);
+      this.openSnackBar('Error actualitzant tasca', 'error-snackbar');
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '👍';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

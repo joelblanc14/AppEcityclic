@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 import $ from 'jquery';
 import 'datatables.net-bs5';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-projecte-list',
@@ -25,7 +26,8 @@ export class ProjecteListComponent implements OnInit {
     private projecteService: ProjecteService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,12 +72,23 @@ export class ProjecteListComponent implements OnInit {
   deleteProject(projecteId: number): void {
     this.projecteService.deleteProjecte(this.empresaId, projecteId).subscribe(
       () => {
-        console.log('Projecte eliminat correctament');
         this.getProjectes();
+        console.log('Projecte eliminat correctament');
+        this.openSnackBar('Projecte eliminat correctament!', 'delete-snackbar');
       },
       (error) => {
         console.error('Error borrant el projecte: ', error);
+        this.openSnackBar('Error eliminant projecte', 'error-snackbar');
       }
     );
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '🗑️';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

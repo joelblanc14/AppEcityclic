@@ -4,6 +4,7 @@ import { TascaService } from '../../../services/tasca.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Tasca } from '../../../models/tasca.interface';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tasca-create',
@@ -23,7 +24,8 @@ export class TascaCreateComponent implements OnInit{
     private fb: FormBuilder,
     private tascaService: TascaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.tascaForm = this.fb.group({
       nom: ['', Validators.required],
@@ -54,12 +56,23 @@ export class TascaCreateComponent implements OnInit{
       this.tascaService.createTasca(this.empresaId, this.projecteId, this.tascaForm.value).subscribe(
         (task: Tasca) => {
           console.log('Tasca creada: ', task);
-          this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'tasques'])
+          this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'tasques']);
+          this.openSnackBar('Tasca creada correctament!', 'create-snackbar');
         },
         (error) => {
           console.error('Error creant la tasca: ', error);
+          this.openSnackBar('Error creant la tasca', 'error-snackbar');
         }
       )
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '✅';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

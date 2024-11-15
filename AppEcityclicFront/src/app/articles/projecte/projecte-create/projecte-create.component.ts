@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ProjecteService } from '../../../services/projecte.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-projecte-create',
   standalone: true,
@@ -19,7 +20,8 @@ export class ProjecteCreateComponent implements OnInit{
     private fb: FormBuilder,
     private projecteService: ProjecteService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.projecteForm = this.fb.group({
       nom: ['', Validators.required],
@@ -39,11 +41,22 @@ export class ProjecteCreateComponent implements OnInit{
         (response) => {
           console.log('Proyecto creado:', response);
           this.router.navigate(['/empresa', this.empresaId, 'projecte']);
+          this.openSnackBar('Projecte creat correctament!', 'create-snackbar');
         },
         (error) => {
           console.error('Error creant el projecte: ', error);
+          this.openSnackBar('Error creant el projecte', 'error-snackbar');
         }
       )
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '✅';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

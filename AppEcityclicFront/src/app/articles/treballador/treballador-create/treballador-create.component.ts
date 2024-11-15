@@ -4,6 +4,7 @@ import { TreballadorService } from '../../../services/treballador.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Treballador } from '../../../models/treballador.interface';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-treballador-create',
   standalone: true,
@@ -20,7 +21,8 @@ export class TreballadorCreateComponent implements OnInit{
     private fb: FormBuilder,
     private treballadorService: TreballadorService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +50,22 @@ export class TreballadorCreateComponent implements OnInit{
         () => {
           console.log('Treballador creat correctament');
           this.router.navigate(['/empresa', this.empresaId, 'treballadors']);
+          this.openSnackBar('Treballador creat correctament!', 'create-snackbar');
         },
         (error) => {
           console.error('Error al crear treballador', error);
+          this.openSnackBar('Error creant treballador', 'error-snackbar');
         }
       );
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '✅';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../models/client.interface';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-client-update',
@@ -23,7 +24,8 @@ export class ClientUpdateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private snackBar: MatSnackBar
   ) {
     this.clientForm = this.fb.group({
       nom: ['', Validators.required],
@@ -68,11 +70,22 @@ export class ClientUpdateComponent implements OnInit {
       this.clientService.updateClient(this.empresaId, this.clientId, updatedClient).subscribe(
         () => {
           this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'client']);
+          this.openSnackBar('Client actualitzat correctament!', 'update-snackbar');
         },
         (error) => {
           console.error('Error al actualitzar el client:', error);
+          this.openSnackBar('Error actualitzant client', 'error-snackbar');
         }
       );
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '👍';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

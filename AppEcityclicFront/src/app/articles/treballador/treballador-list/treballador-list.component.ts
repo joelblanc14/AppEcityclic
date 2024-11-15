@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 import $ from 'jquery';
 import 'datatables.net-bs5';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-treballador-list',
@@ -25,7 +26,8 @@ export class TreballadorListComponent implements OnInit{
   constructor(private treballadorService: TreballadorService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -72,10 +74,21 @@ export class TreballadorListComponent implements OnInit{
       () => {
       this.treballadors = this.treballadors.filter(t => t.treballadorId !== id);
       console.log('Treballador eliminat correctament!');
+      this.openSnackBar('Treballador eliminat correctament!', 'delete-snackbar');
     },
     (error) => {
       console.log('Error al eliminar treballador', error);
+      this.openSnackBar('Error eliminant treballador', 'error-snackbar');
       }
     );
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '🗑️';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

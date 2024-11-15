@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../models/client.interface';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-client-create',
@@ -22,7 +23,8 @@ export class ClientCreateComponent implements OnInit{
     private fb: FormBuilder,
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
@@ -51,11 +53,22 @@ export class ClientCreateComponent implements OnInit{
         () => {
           console.log('Client creat correctament');
           this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'client']);
+          this.openSnackBar('Client creat correctament!', 'create-snackbar');
         },
         (error) => {
           console.error('Error al crear client', error);
+          this.openSnackBar('Error al crear client', 'error-snackbar')
         }
       );
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌': '✅';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

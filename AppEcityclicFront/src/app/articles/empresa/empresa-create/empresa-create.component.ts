@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Empresa } from '../../../models/empresa.interface';
 import { CommonModule } from '@angular/common';
 import { cifValidator } from '../../../shared/validators/cif.validator';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-empresa-create',
   standalone: true,
@@ -18,7 +19,8 @@ export class EmpresaCreateComponent {
   constructor(
     private fb: FormBuilder,
     private empresaService: EmpresaService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.empresaForm = this.fb.group({
       nom: ['', Validators.required],
@@ -32,7 +34,20 @@ export class EmpresaCreateComponent {
       const novaEmpresa: Empresa = this.empresaForm.value;
       this.empresaService.createEmpresa(novaEmpresa).subscribe(() => {
         this.router.navigate(['/empreses']);
+        this.openSnackBar('Empresa creada correctament!', 'create-snackbar');
       });
+    } else {
+      console.error('Error al crear empresa');
+      this.openSnackBar("Error al crear l'empresa", 'error-snackbar');
     }
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '✅';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

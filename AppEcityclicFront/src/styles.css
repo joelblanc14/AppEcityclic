@@ -38,3 +38,27 @@ h1, h2, h3, h4, h5, h6 {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: transparent !important;
+}
+
+.mdc-button__label {
+  color: white;
+}
+
+.create-snackbar {
+  background-color: #81C784;
+}
+
+.update-snackbar {
+  background-color: #64B5F6;
+}
+
+.delete-snackbar {
+  background-color: #FFB74D;
+}
+
+.error-snackbar {
+  background-color: #F44336;
+}

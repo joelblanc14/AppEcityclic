@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 import $ from 'jquery';
 import 'datatables.net-bs5';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-client-list',
@@ -24,8 +25,13 @@ export class ClientListComponent  implements OnInit{
     public projecteId: number = 0;
     datatable: any;
 
-    constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog){}
-
+    constructor(
+      private clientService: ClientService,
+      private router: Router,
+      private route: ActivatedRoute,
+      private dialog: MatDialog,
+      private snackBar: MatSnackBar
+    ){}
 
     ngOnInit(): void {
       this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
@@ -73,10 +79,21 @@ export class ClientListComponent  implements OnInit{
           this.clients = this.clients.filter(client => client.clientId !== id);
           this.loadClients();
           console.log('Client eliminat correctament!');
+          this.openSnackBar('Client eliminat correctament!', 'delete-snackbar');
         },
         (error: any) => {
           console.error('Error al eliminar client', error);
+          this.openSnackBar('Error eliminant client', 'error-snackbar');
         }
       );
+    }
+
+    openSnackBar(message: string, type: string): void {
+      const emoji = type === 'error-snackbar' ? '❌' : '🗑️';
+      const config = new MatSnackBarConfig();
+      config.duration = 3000;
+      config.panelClass = [type];
+
+      this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
     }
 }

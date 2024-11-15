@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.component';
 import $ from 'jquery';
 import 'datatables.net-bs5';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tasca-list-projecte',
@@ -24,7 +25,8 @@ export class TascaListProjecteComponent implements OnInit {
   constructor(
     private tascaService: TascaService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -63,8 +65,23 @@ export class TascaListProjecteComponent implements OnInit {
   }
 
   deleteTasca(tascaId: number): void {
-    this.tascaService.deleteTasca(this.empresaId, this.projecteId, tascaId).subscribe(() => {
+    this.tascaService.deleteTasca(this.empresaId, this.projecteId, tascaId).subscribe(
+      () => {
       this.tasques = this.tasques.filter(tasca => tasca.tascaId !== tascaId);
+    },
+    (error) => {
+      console.log('Error eliminant tasca', error);
+      this.openSnackBar('Error eliminant tasca', 'error-snackbar');
     });
+    this.openSnackBar('Tasca eliminada correctament!', 'delete-snackbar');
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '🗑️';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }

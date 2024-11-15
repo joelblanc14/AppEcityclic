@@ -4,6 +4,7 @@ import { Projecte } from '../../../models/projecte.interface';
 import { ProjecteService } from '../../../services/projecte.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-projecte-update',
   standalone: true,
@@ -21,7 +22,8 @@ export class ProjecteUpdateComponent implements OnInit{
     private fb: FormBuilder,
     private projecteService: ProjecteService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.projecteForm = this.fb.group({
       nom: ['', Validators.required],
@@ -52,10 +54,21 @@ export class ProjecteUpdateComponent implements OnInit{
       () => {
         console.log('Projecte actualitzat correctament!');
         this.router.navigate(['/empresa', this.empresaId, 'projecte']);
+        this.openSnackBar('Projecte actualitzat correctament!', 'update-snackbar');
       },
       (error) => {
         console.error('Error al actualitzar el projecte', error);
+        this.openSnackBar('Error actualitzant projecte', 'error-snackbar');
       }
     )
+  }
+
+  openSnackBar(message: string, type: string): void {
+    const emoji = type === 'error-snackbar' ? '❌' : '👍';
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.panelClass = [type];
+
+    this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
   }
 }
