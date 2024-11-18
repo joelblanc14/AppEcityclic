@@ -49,7 +49,7 @@ export class EmpresaUpdateComponent implements OnInit{
       const updatedEmpresa: Empresa = {...this.empresaForm.value, empresaId: this.empresaId};
       this.empresaService.updateEmpresa(updatedEmpresa, this.empresaId).subscribe(() => {
         this.router.navigate(['/empreses'])
-        this.openSnackBar('Empresa actualizada correctament!', 'create-snackbar');
+        this.openSnackBar('Empresa actualizada correctament!', 'update-snackbar');
       })
     } else {
       console.error('Error creant empresa');
@@ -58,7 +58,7 @@ export class EmpresaUpdateComponent implements OnInit{
   }
 
   openSnackBar(message: string, type: string): void {
-    const emoji = type === 'error-snackbar' ? '❌' : '👍';
+    const emoji = type === 'error-snackbar' ? '⚠️' : '👍';
     const config = new MatSnackBarConfig();
     config.duration = 3000;
     config.panelClass = [type];

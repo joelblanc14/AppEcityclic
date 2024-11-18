@@ -81,7 +81,7 @@ export class ClientUpdateComponent implements OnInit {
   }
 
   openSnackBar(message: string, type: string): void {
-    const emoji = type === 'error-snackbar' ? '❌' : '👍';
+    const emoji = type === 'error-snackbar' ? '⚠️' : '👍';
     const config = new MatSnackBarConfig();
     config.duration = 3000;
     config.panelClass = [type];
