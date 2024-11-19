@@ -38,7 +38,7 @@ public class EmpresaService {
 
     public Empresa save(Empresa empresa) {
         logger.debug("Intentant guardar empresa: {}", empresa);
-        try { 
+        try {
             Empresa savedEmpresa = empresaRepository.save(empresa);
             logger.info("Empresa guardada correctament amb ID: {}", savedEmpresa.getEmpresaId());
             return savedEmpresa;
