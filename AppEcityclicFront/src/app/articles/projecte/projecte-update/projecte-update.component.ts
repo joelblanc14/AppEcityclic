@@ -5,10 +5,11 @@ import { ProjecteService } from '../../../services/projecte.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-projecte-update',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, TranslateModule],
   templateUrl: './projecte-update.component.html',
   styleUrl: './projecte-update.component.css'
 })

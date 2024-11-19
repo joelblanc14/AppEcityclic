@@ -4,10 +4,11 @@ import { ProjecteService } from '../../../services/projecte.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-projecte-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, TranslateModule],
   templateUrl: './projecte-create.component.html',
   styleUrl: './projecte-create.component.css'
 })

@@ -8,11 +8,12 @@ import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.
 import $ from 'jquery';
 import 'datatables.net-bs5';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-projecte-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './projecte-list.component.html',
   styleUrl: './projecte-list.component.css'
 })

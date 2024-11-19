@@ -9,11 +9,12 @@ import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.
 import $ from 'jquery';
 import 'datatables.net-bs5';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-treballador-list',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, TranslateModule],
   templateUrl: './treballador-list.component.html',
   styleUrl: './treballador-list.component.css'
 })

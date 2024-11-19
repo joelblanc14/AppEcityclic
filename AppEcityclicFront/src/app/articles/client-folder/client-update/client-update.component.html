@@ -1,30 +1,30 @@
 <div class="container mt-5 form">
-  <h2>Actualitzar client</h2>
+  <h2>{{"Actualitzar client" | translate}}</h2>
   <div class="form-group">
     <form [formGroup]="clientForm" (ngSubmit)="ngOnSubmit()">
-      <label for="nom">Nom:</label>
+      <label for="nom">{{"Nom" | translate}}:</label>
       <input id="nom" class="form-control" formControlName="nom" required>
       <div *ngIf="clientForm.get('nom')?.invalid && (clientForm.get('nom')?.touched || clientForm.get('nom')?.dirty)">
-        <small class="text-danger">El nom és obligatori.</small>
+        <small class="text-danger">{{"El nom és obligatori" | translate}}.</small>
       </div>
 
-      <label for="email">Email:</label>
+      <label for="email">{{"Email" | translate}}:</label>
       <input id="email" class="form-control" formControlName="email" required>
       <div *ngIf="clientForm.get('email')?.hasError('required') && (clientForm.get('email')?.touched || clientForm.get('email')?.dirty)">
-        <small class="text-danger">L'email és obligatori.</small>
+        <small class="text-danger">{{"L'email és obligatori" | translate}}.</small>
       </div>
       <div *ngIf="clientForm.get('email')?.hasError('email') && clientForm.get('email')?.dirty">
-        <small class="text-danger">L'email no és vàlid.</small>
+        <small class="text-danger">{{"L'email no és vàlid" | translate}}.</small>
       </div>
 
-      <label for="adreca">Adreça:</label>
+      <label for="adreca">{{"Adreça" | translate}}:</label>
       <input id="adreca" class="form-control" formControlName="adreca" required>
       <div *ngIf="clientForm.get('adreca')?.invalid && (clientForm.get('adreca')?.touched || clientForm.get('adreca')?.dirty)">
-        <small class="text-danger">L'adreça és obligatoria.</small>
+        <small class="text-danger">{{"L'adreça és obligatoria" | translate}}.</small>
       </div>
 
-      <button class="btn btn-primary mt-2" type="submit" [disabled]="clientForm.invalid">Actualitzar client</button>
-      <button class="btn btn-secondary mt-2 ms-2" [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'client']">Cancel·lar</button>
+      <button class="btn btn-primary mt-2" type="submit" [disabled]="clientForm.invalid">{{"Actualitzar client" | translate}}</button>
+      <button class="btn btn-secondary mt-2 ms-2" [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'client']">{{"Cancel·lar" | translate}}</button>
     </form>
   </div>
 </div>

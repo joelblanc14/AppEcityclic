@@ -8,11 +8,12 @@ import { DeleteModalComponent } from '../../../shared/delete-modal/delete-modal.
 import $ from 'jquery';
 import 'datatables.net-bs5';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tasca-list-projecte',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './tasca-list-projecte.component.html',
   styleUrl: './tasca-list-projecte.component.css'
 })

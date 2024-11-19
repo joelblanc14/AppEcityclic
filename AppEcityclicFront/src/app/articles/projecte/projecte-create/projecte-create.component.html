@@ -1,30 +1,30 @@
 <div class="container mt-5 form">
-  <h2>Crea un Nou Projecte</h2>
+  <h2>{{"Crear un nou projecte" | translate}}</h2>
   <div class="form-group">
     <form [formGroup]="projecteForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="nom" class="form-label">Nom</label>
+        <label for="nom" class="form-label">{{"Nom" | translate}}</label>
         <input type="text" id="nom" class="form-control" formControlName="nom" required>
         <div *ngIf="projecteForm.get('nom')?.invalid && (projecteForm.get('nom')?.touched || projecteForm.get('nom')?.dirty)">
-          <small class="text-danger">El nom és obligatori.</small>
+          <small class="text-danger">{{"El nom és obligatori" | translate}}</small>
         </div>
       </div>
       <div class="mb-3">
-        <label for="estat" class="form-label">Estat</label>
+        <label for="estat" class="form-label">{{"Estat" | translate}}</label>
         <select name="estat" id="estat" class="form-control" formControlName="estat" required>
-          <option value="">Selecciona un estat</option>
-          <option value="Actiu">Actiu</option>
+          <option value="">{{"Selecciona un estat" | translate}}</option>
+          <option value="Actiu">{{"Actiu" | translate}}</option>
         </select>
         <div *ngIf="projecteForm.get('estat')?.invalid && (projecteForm.get('estat')?.touched || projecteForm.get('estat')?.dirty)">
-          <small class="text-danger">L'estat és obligatori.</small>
+          <small class="text-danger">{{"L'estat és obligatori" | translate}}</small>
         </div>
       </div>
       <div class="mb-3">
-        <label for="descripcio" class="form-label">Descripció</label>
+        <label for="descripcio" class="form-label">{{"Descripció" | translate}}</label>
         <textarea id="descripcio" class="form-control" formControlName="descripcio"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Crear Projecte</button>
-      <button class="btn btn-secondary ms-2" [routerLink]="['/empresa', empresaId, 'projecte']">Cancel·lar</button>
+      <button type="submit" class="btn btn-primary">{{"Crear Projecte" | translate}}</button>
+      <button class="btn btn-secondary ms-2" [routerLink]="['/empresa', empresaId, 'projecte']">{{"Cancel·lar" | translate}}</button>
     </form>
   </div>
 </div>

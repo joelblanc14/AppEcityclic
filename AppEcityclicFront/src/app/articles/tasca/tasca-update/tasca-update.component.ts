@@ -9,11 +9,12 @@ import { TreballadorService } from '../../../services/treballador.service';
 import { ProjecteService } from '../../../services/projecte.service';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tasca-update',
   standalone: true,
-  imports: [[ReactiveFormsModule, RouterModule, FormsModule, CommonModule]],
+  imports: [[ReactiveFormsModule, RouterModule, FormsModule, CommonModule, TranslateModule]],
   templateUrl: './tasca-update.component.html',
   styleUrl: './tasca-update.component.css'
 })

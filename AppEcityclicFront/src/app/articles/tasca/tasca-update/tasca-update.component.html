@@ -1,35 +1,35 @@
 <div class="container mt-5 form">
-  <h2>Actualitzar Tasca</h2>
+  <h2>{{"Actualitzar Tasca" | translate}}</h2>
   <form [formGroup]="tascaForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <div class="mb-3">
-        <label for="nom">Nom de la Tasca:</label>
+        <label for="nom">{{"Nom" | translate}}</label>
         <input id="nom" class="form-control" formControlName="nom" required />
         <div *ngIf="tascaForm.get('nom')?.invalid && (tascaForm.get('nom')?.touched || tascaForm.get('nom')?.dirty)">
-          <small class="text-danger">El nom és obligatori.</small>
+          <small class="text-danger">{{"El nom és obligatori" | translate}}</small>
         </div>
       </div>
       <div class="mb-3">
-        <label for="estat">Estat:</label>
+        <label for="estat">{{"Estat" | translate}}</label>
         <select name="estat" id="estat" class="form-control" formControlName="estat" required>
-          <option value="pendent">Pendent</option>
-          <option value="en_progres">En Progres</option>
-          <option value="completat">Finalitzada</option>
+          <option value="pendent">{{"Pendent" | translate}}</option>
+          <option value="en_progres">{{"En Progres" | translate}}</option>
+          <option value="completat">{{"Finalitzada" | translate}}</option>
         </select>
         <div
           *ngIf="tascaForm.get('estat')?.invalid && (tascaForm.get('estat')?.touched || tascaForm.get('estat')?.dirty)">
-          <small class="text-danger">L'estat és obligatori.</small>
+          <small class="text-danger">{{"L'estat és obligatori" | translate}}</small>
         </div>
       </div>
 
       <div class="mb-3">
-        <label for="descripcio">Descripció:</label>
-        <textarea id="descripcio" class="form-control" formControlName="descripcio" required></textarea>
+        <label for="descripcio">{{"Descripció" | translate}}</label>
+        <textarea id="descripcio" class="form-control" formControlName="descripcio"></textarea>
       </div>
 
-      <button class="btn btn-primary mt-2" type="submit">Actualitzar Tasca</button>
+      <button class="btn btn-primary mt-2" type="submit">{{"Actualitzar Tasca" | translate}}</button>
       <button class="btn btn-secondary mt-2 ms-2"
-        [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'tasques']">Cancel·lar</button>
+        [routerLink]="['/empresa', empresaId, 'projecte', projecteId, 'tasques']">{{"Cancel·lar" | translate}}</button>
     </div>
   </form>
 </div>

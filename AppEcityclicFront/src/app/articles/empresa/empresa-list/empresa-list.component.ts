@@ -9,11 +9,12 @@ import { MatDialog } from '@angular/material/dialog';
 import $ from 'jquery';
 import 'datatables.net-bs5';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-empresa-list',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, TranslateModule],
   templateUrl: './empresa-list.component.html',
   styleUrl: './empresa-list.component.css'
 })

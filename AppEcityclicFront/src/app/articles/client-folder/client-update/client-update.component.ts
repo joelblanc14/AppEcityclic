@@ -5,11 +5,12 @@ import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../models/client.interface';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-client-update',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, TranslateModule],
   templateUrl: './client-update.component.html',
   styleUrl: './client-update.component.css'
 })

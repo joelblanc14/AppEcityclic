@@ -5,10 +5,12 @@ import { TreballadorService } from '../../../services/treballador.service';
 import { Treballador } from '../../../models/treballador.interface';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-treballador-update',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, TranslateModule],
   templateUrl: './treballador-update.component.html',
   styleUrls: ['./treballador-update.component.css']
 })

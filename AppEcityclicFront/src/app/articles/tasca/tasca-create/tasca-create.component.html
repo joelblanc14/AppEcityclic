@@ -1,35 +1,35 @@
-<div class="container mt-5 form">
-  <h2>Crea una nova Tasca</h2>
+<div class="container mt-5 form display-flex">
+  <h2>{{"Crea una nova Tasca" | translate}}</h2>
 
   <form [formGroup]="tascaForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <div class="mb-3">
-        <label for="nom" class="form-label">Nom</label>
+        <label for="nom" class="form-label">{{"Nom" | translate}}</label>
         <input type="text" id="nom" formControlName="nom" class="form-control" />
         <div *ngIf="tascaForm.get('nom')?.invalid && (tascaForm.get('nom')?.touched || tascaForm.get('nom')?.dirty)">
-          <small class="text-danger">El nom és obligatori.</small>
+          <small class="text-danger">{{"El nom és obligatori" | translate}}</small>
         </div>
       </div>
 
       <div class="mb-3">
-        <label for="estat" class="form-label">Estat</label>
+        <label for="estat" class="form-label">{{"Estat" | translate}}</label>
         <select id="estat" formControlName="estat" class="form-select">
-          <option value="">Selecciona un estat</option>
-          <option value="pendent">Pendent</option>
-          <option value="complet">Complet</option>
+          <option value="">{{"Selecciona un estat" | translate}}</option>
+          <option value="pendent">{{"Pendent" | translate}}</option>
+          <option value="complet">{{"Completat" | translate}}</option>
         </select>
         <div *ngIf="tascaForm.get('estat')?.invalid && (tascaForm.get('estat')?.touched || tascaForm.get('estat')?.dirty)">
-          <small class="text-danger">L'estat és obligatori.</small>
+          <small class="text-danger">{{"L'estat és obligatori" | translate}}</small>
         </div>
       </div>
 
       <div class="mb-3">
-        <label for="descripcio" class="form-label">Descripció</label>
+        <label for="descripcio" class="form-label">{{"Descripció" | translate}}</label>
         <textarea id="descripcio" formControlName="descripcio" class="form-control" rows="3"></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary" [disabled]="tascaForm.invalid">Crear Tasca</button>
-      <button type="button" class="btn btn-secondary ms-2" [routerLink]="(['/empresa', empresaId, 'projecte', projecteId, 'tasques'])">Cancel·lar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="tascaForm.invalid">{{"Crear Tasca" | translate}}</button>
+        <button type="button" class="btn btn-secondary ms-2" [routerLink]="(['/empresa', empresaId, 'projecte', projecteId, 'tasques'])">{{"Cancel·lar" | translate}}</button>
     </div>
   </form>
 </div>

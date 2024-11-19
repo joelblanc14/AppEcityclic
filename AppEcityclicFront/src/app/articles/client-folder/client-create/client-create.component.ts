@@ -5,11 +5,12 @@ import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../models/client.interface';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-client-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, TranslateModule],
   templateUrl: './client-create.component.html',
   styleUrl: './client-create.component.css'
 })

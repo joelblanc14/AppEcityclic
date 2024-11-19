@@ -1,20 +1,20 @@
 <div class="container mt-5">
   <div class="tasca-list">
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <h2>Llistat de Tasques per al Treballador</h2>
-      <button class="btn btn-primary" [routerLink]="['/empresa', empresaId, 'treballadors']">Tornar a Treballadors</button>
+      <h2>{{"Llistat de Tasques per al Treballador" | translate}}</h2>
+      <button class="btn btn-primary" [routerLink]="['/empresa', empresaId, 'treballadors']">{{"Tornar a Treballadors" | translate}}</button>
     </div>
 
     <table id="tascaTable" class="table table-bordered table-striped text-center">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Nom</th>
-          <th>Descripció</th>
-          <th>Estat</th>
-          <th>Data Inici</th>
-          <th>Data Fi</th>
-          <th>Accions</th>
+          <th>{{"Nom" | translate}}</th>
+          <th>{{"Descripció" | translate}}</th>
+          <th>{{"Estat" | translate}}</th>
+          <th>{{"Data Inici" | translate}}</th>
+          <th>{{"Data Fi" | translate}}</th>
+          <th>{{"Accions" | translate}}</th>
         </tr>
       </thead>
       <tbody>
@@ -24,7 +24,7 @@
           <td>{{ tasca.descripcio }}</td>
           <td>{{ tasca.estat }}</td>
           <td>{{ tasca.dataInici | date:'dd/MM/yyyy' }}</td>
-          <td>{{ tasca.dataFi ? (tasca.dataFi | date:'dd/MM/yyyy') : 'Encara no completada' }}</td>
+          <td>{{ tasca.dataFi ? (tasca.dataFi | date:'dd/MM/yyyy') : 'Encara no completada' | translate }}</td>
           <td>
             <button class="btn btn-danger btn-sm ms-2">Borrar</button>
           </td>

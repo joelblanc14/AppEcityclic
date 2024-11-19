@@ -6,10 +6,11 @@ import { Empresa } from '../../../models/empresa.interface';
 import { CommonModule } from '@angular/common';
 import { cifValidator } from '../../../shared/validators/cif.validator';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-empresa-create',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, TranslateModule],
   templateUrl: './empresa-create.component.html',
   styleUrl: './empresa-create.component.css'
 })

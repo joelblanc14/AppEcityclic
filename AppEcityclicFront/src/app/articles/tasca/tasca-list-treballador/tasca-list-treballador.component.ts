@@ -5,11 +5,12 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import $ from 'jquery';
 import 'datatables.net-bs5';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tasca-list-treballador',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './tasca-list-treballador.component.html',
   styleUrl: './tasca-list-treballador.component.css'
 })

@@ -11,6 +11,34 @@ h1, h2, h3, h4, h5, h6 {
   font-style: inherit;
 }
 
+.translate-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #84c400;
+  border: none;
+
+}
+
+.btn-primary:hover {
+  background-color: #93db03;
+}
+
+.btn-info {
+  color: black;
+  background-color: #f9f3e9;
+  border-color: black;
+}
+
+.btn-info:hover {
+  background-color: #e9e2d5;
+  border-color: black;
+}
+
 .container.form {
     display: flex;
     flex-direction: column;

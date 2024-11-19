@@ -1,33 +1,33 @@
 <div class="container mt-5 form">
-  <h2>Actualitzar treballador</h2>
+  <h2>{{"Actualitzar treballador" | translate}}</h2>
   <div class="form-group">
     <form [formGroup]="treballadorForm" (ngSubmit)="ngOnSubmit()">
-      <label for="nom">Nom:</label>
+      <label for="nom">{{'Nom' | translate}}:</label>
       <input id="nom" class="form-control" formControlName="nom" required />
       <div *ngIf="treballadorForm.get('nom')?.invalid && (treballadorForm.get('nom')?.touched || treballadorForm.get('nom')?.dirty)">
-        <small class="text-danger">El nom és obligatori.</small>
+        <small class="text-danger">{{'El nom és obligatori' | translate}}.</small>
       </div>
 
-      <label for="posicio">Posició:</label>
+      <label for="posicio">{{'Posició' | translate}}:</label>
       <input id="posicio" class="form-control" formControlName="posicio" required>
       <div *ngIf="treballadorForm.get('posicio')?.invalid && (treballadorForm.get('posicio')?.touched || treballadorForm.get('posicio')?.dirty)">
-        <small class="text-danger">La posició és obligatoria.</small>
+        <small class="text-danger">{{'La posició és obligatoria' | translate}}.</small>
       </div>
-      <label for="salari">Salari:</label>
+      <label for="salari">{{'Salari' | translate}}:</label>
       <input id="salari" class="form-control" formControlName="salari" required>
       <div *ngIf="treballadorForm.get('salari')?.invalid && (treballadorForm.get('salari')?.touched || treballadorForm.get('salari')?.dirty)">
-        <small class="text-danger">El salari és obligatori.</small>
+        <small class="text-danger">{{'El salari és obligatori' | translate}}.</small>
       </div>
-      <label for="email">Email:</label>
+      <label for="email">{{'Email' | translate}}:</label>
       <input id="email" class="form-control" formControlName="email" required>
       <div *ngIf="treballadorForm.get('email')?.hasError('required') && (treballadorForm.get('email')?.touched || treballadorForm.get('email')?.dirty)">
-        <small class="text-danger">L'email és obligatori.</small>
+        <small class="text-danger">{{"L'email és obligatori" | translate}}.</small>
       </div>
       <div *ngIf="treballadorForm.get('email')?.hasError('email') && treballadorForm.get('email')?.dirty">
-        <small class="text-danger">L'email no és vàlid.</small>
+        <small class="text-danger">{{"L'email no és vàlid" | translate}}.</small>
       </div>
-      <button class="btn btn-primary mt-2" type="submit" [disabled]="treballadorForm.invalid">Crear nou treballador</button>
-      <button class="btn btn-secondary mt-2 ms-2" [routerLink]="['/empresa', empresaId, 'treballadors']">Cancel·lar</button>
+      <button class="btn btn-primary mt-2" type="submit" [disabled]="treballadorForm.invalid">{{"Actualitzar treballador" | translate}}</button>
+      <button class="btn btn-secondary mt-2 ms-2" [routerLink]="['/empresa', empresaId, 'treballadors']">{{"Cancel·lar" | translate}}</button>
     </form>
   </div>
 </div>
