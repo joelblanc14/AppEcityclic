@@ -22,7 +22,6 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ClientListComponent  implements OnInit{
 
     public clients: Client[] = [];
-    public empresaId: number = 0;
     public projecteId: number = 0;
     datatable: any;
 
@@ -35,13 +34,12 @@ export class ClientListComponent  implements OnInit{
     ){}
 
     ngOnInit(): void {
-      this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
       this.projecteId = +this.route.snapshot.paramMap.get('projecteId')!;
       this.loadClients();
     }
 
     loadClients(): void {
-      this.clientService.getClientsByProjecte(this.empresaId, this.projecteId).subscribe(
+      this.clientService.getClientsByProjecte(this.projecteId).subscribe(
         (clients: Client[]) => {
             console.log('Clients received:', clients);
             this.clients = clients;
@@ -75,7 +73,7 @@ export class ClientListComponent  implements OnInit{
     }
 
     deleteClient(id: number): void {
-      this.clientService.deleteClient(this.empresaId, id).subscribe(
+      this.clientService.deleteClient(id).subscribe(
           () => {
           this.clients = this.clients.filter(client => client.clientId !== id);
           this.loadClients();

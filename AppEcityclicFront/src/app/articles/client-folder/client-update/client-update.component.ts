@@ -18,7 +18,6 @@ export class ClientUpdateComponent implements OnInit {
 
   clientForm!: FormGroup;
   clientId!: number;
-  empresaId!: number;
   projecteId!: number;
 
   constructor(
@@ -37,13 +36,12 @@ export class ClientUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientId = +this.route.snapshot.paramMap.get('clientId')!;
-    this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
     this.projecteId = +this.route.snapshot.paramMap.get('projecteId')!;
     this.getClient();
   }
 
   getClient(): void {
-    this.clientService.getClientById(this.empresaId, this.clientId).subscribe(
+    this.clientService.getClientById(this.clientId).subscribe(
       (client: Client) => {
         console.log('El client es ', client);
         if (client) {
@@ -65,12 +63,11 @@ export class ClientUpdateComponent implements OnInit {
       const updatedClient: Client = {
         ...this.clientForm.value,
         clientId: this.clientId,
-        empresa: { empresaId: this.empresaId },
         projecte: { projecteId: this.projecteId }
       };
-      this.clientService.updateClient(this.empresaId, this.clientId, updatedClient).subscribe(
+      this.clientService.updateClient(this.clientId, updatedClient).subscribe(
         () => {
-          this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'client']);
+          this.router.navigate(['/projecte', this.projecteId, 'client']);
           this.openSnackBar('Client actualitzat correctament!', 'update-snackbar');
         },
         (error) => {

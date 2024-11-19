@@ -41,14 +41,11 @@ export const routes: Routes = [
   {path: 'empresa/:empresaId/projecte/:projecteId/tasques/edit/:tascaId',
     loadComponent: () => import('./articles/tasca/tasca-update/tasca-update.component').then(m => m.TascaUpdateComponent)
   },
-  {path: 'empresa/:empresaId/projecte/:projecteId/client',
-    loadComponent: () => import('./articles/client-folder/client-list/client-list.component').then(m => m.ClientListComponent)
-  },
-  {path: 'empresa/:empresaId/projecte/:projecteId/client/create',
-    loadComponent: () => import('./articles/client-folder/client-create/client-create.component').then(m => m.ClientCreateComponent)
-  },
-  {path: 'empresa/:empresaId/projecte/:projecteId/client/edit/:clientId',
-    loadComponent: () => import('./articles/client-folder/client-update/client-update.component').then(m => m.ClientUpdateComponent)
-  },
+  {path: 'projecte/:projecteId/client',
+    loadComponent: () => import('./articles/client-folder/client-list/client-list.component').then(m => m.ClientListComponent) },
+  {path: 'projecte/:projecteId/client/create',
+    loadComponent: () => import('./articles/client-folder/client-create/client-create.component').then(m => m.ClientCreateComponent) },
+  {path: 'projecte/:projecteId/client/edit/:clientId',
+    loadComponent: () => import('./articles/client-folder/client-update/client-update.component').then(m => m.ClientUpdateComponent) },
   {path: '**', redirectTo: 'empresa', pathMatch: 'full'},
 ];

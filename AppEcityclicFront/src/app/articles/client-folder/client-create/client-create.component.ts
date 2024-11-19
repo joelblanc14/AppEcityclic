@@ -17,7 +17,6 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ClientCreateComponent implements OnInit{
 
   public clientsForm!: FormGroup;
-  public empresaId!: number;
   public projecteId!: number;
 
   constructor(
@@ -29,7 +28,6 @@ export class ClientCreateComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
     this.projecteId = +this.route.snapshot.paramMap.get('projecteId')!;
     this.initForm();
   }
@@ -46,14 +44,13 @@ export class ClientCreateComponent implements OnInit{
     if (this.clientsForm.valid) {
       const newClient: Client = {
         ...this.clientsForm.value,
-        empresaId: this.empresaId,
         projecteId: this.projecteId
       };
 
-      this.clientService.createClient(this.empresaId, this.projecteId, newClient).subscribe(
+      this.clientService.createClient(this.projecteId, newClient).subscribe(
         () => {
           console.log('Client creat correctament');
-          this.router.navigate(['/empresa', this.empresaId, 'projecte', this.projecteId, 'client']);
+          this.router.navigate(['/projecte', this.projecteId, 'client']);
           this.openSnackBar('Client creat correctament!', 'create-snackbar');
         },
         (error) => {

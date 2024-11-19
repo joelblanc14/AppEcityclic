@@ -14,7 +14,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/empresa/{empresaId}/client")
+@RequestMapping("/api/client")
 @CrossOrigin("http://localhost:4200")
 public class ClientController {
 
@@ -23,13 +23,13 @@ public class ClientController {
 
     // Obtenir tots els clients d'un projecte
     @GetMapping("/{projecteId}")
-    public ResponseEntity<List<Client>> getClientsByProjecte(@PathVariable Long empresaId, @PathVariable Long projecteId) {
+    public ResponseEntity<List<Client>> getClientsByProjecte(@PathVariable Long projecteId) {
         List<Client> clients = clientService.findByProjecteId(projecteId);
         return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
     @GetMapping("/{id}/get")
-    public ResponseEntity<Client> getClientById(@PathVariable Long empresaId, @PathVariable Long id) {
+    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
         Client client = clientService.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Client no trobat amb id: " + id));
         return new ResponseEntity<>(client, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class ClientController {
 
     // Crear un client i associar-lo a un projecte
     @PostMapping("/{projecteId}")
-    public ResponseEntity<Client> createClient(@PathVariable Long empresaId, @PathVariable Long projecteId, @RequestBody Client client) {
+    public ResponseEntity<Client> createClient(@PathVariable Long projecteId, @RequestBody Client client) {
         Projecte projecte = projecteService.findById(projecteId)
                 .orElseThrow(() -> new EntityNotFoundException("Projecte no trobat amb id: " + projecteId));
 
@@ -49,7 +49,7 @@ public class ClientController {
 
     // Actualitzar un client
     @PutMapping("/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable Long empresaId, @RequestBody Client client, @PathVariable Long id) {
+    public ResponseEntity<Client> updateClient(@RequestBody Client client, @PathVariable Long id) {
         try {
             Client updatedClient = clientService.update(client, id);
             return new ResponseEntity<>(updatedClient, HttpStatus.OK);
@@ -62,7 +62,7 @@ public class ClientController {
 
     // Borrar un client
     @DeleteMapping("/{id}")
-    public ResponseEntity<Client> deleteClient(@PathVariable Long empresaId, @PathVariable Long id) {
+    public ResponseEntity<Client> deleteClient(@PathVariable Long id) {
         try {
             clientService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -73,4 +73,3 @@ public class ClientController {
         }
     }
 }
-
