@@ -10,6 +10,7 @@ import $ from 'jquery';
 import 'datatables.net-bs5';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TranslateModule } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-client-list',
@@ -30,7 +31,8 @@ export class ClientListComponent  implements OnInit{
       private router: Router,
       private route: ActivatedRoute,
       private dialog: MatDialog,
-      private snackBar: MatSnackBar
+      private snackBar: MatSnackBar,
+      private location: Location
     ){}
 
     ngOnInit(): void {
@@ -94,5 +96,9 @@ export class ClientListComponent  implements OnInit{
       config.panelClass = [type];
 
       this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
+    }
+
+    goBack(): void {
+      this.location.back();
     }
 }

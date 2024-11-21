@@ -21,7 +21,7 @@
         <small class="text-danger" *ngIf="empresaForm.get('cif')?.hasError('cifInvalid')">{{'El CIF no té el format correcte' | translate}}</small>
       </div>
       <button class="btn btn-primary mt-2" type="submit" [disabled]="empresaForm.invalid">{{'Actualitzar Empresa' | translate}}</button>
-      <button class="btn btn-secondary  mt-2 ms-2" [routerLink]="['/empresaes']">{{'Cancel·lar' | translate}}</button>
+      <button class="btn btn-secondary  mt-2 ms-2" [routerLink]="['/empresa']">{{'Cancel·lar' | translate}}</button>
     </form>
   </div>
 </div>

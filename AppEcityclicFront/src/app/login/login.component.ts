@@ -3,11 +3,13 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -15,7 +17,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -24,14 +26,17 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const {username, password} = this.loginForm.value;
+      const { username, password } = this.loginForm.value;
 
-      if (username === 'admin' && password === 'password') {
-        localStorage.setItem('token', 'auth-token');
-        this.router.navigate(['/empreses']);
-      } else {
-        this.errorMessage = 'Usuari o contrasenya incorrectes';
-      }
+      this.authService.login(username, password).subscribe(
+        (response) => {
+          this.authService.setToken(response.token);
+          this.router.navigate(['/empresa']);
+        },
+        (error) => {
+          this.errorMessage = 'Usuari o contrasenya incorrectes';
+        }
+      );
     }
   }
 }

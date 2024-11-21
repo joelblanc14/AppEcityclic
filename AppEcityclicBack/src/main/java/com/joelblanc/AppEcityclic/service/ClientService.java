@@ -18,6 +18,13 @@ public class ClientService {
     private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
     private final ClientRepository clientRepository;
 
+    public List<Client> findAll() {
+        logger.debug("Buscant tots els clients");
+        List<Client> clients = clientRepository.findAll();
+        logger.info("Tots els clients trobats: {}", clients);
+        return clients;
+    }
+
     public Optional<Client> findById(Long id) {
         logger.debug("Buscant client per id: {}", id);
         Optional<Client> client = clientRepository.findById(id);

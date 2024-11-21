@@ -23,6 +23,13 @@
         <label for="descripcio" class="form-label">{{"Descripció" | translate}}</label>
         <textarea id="descripcio" class="form-control" formControlName="descripcio"></textarea>
       </div>
+      <div class="mb-3">
+        <label for="clientId" class="form-label">{{"Client" | translate}}</label>
+        <select id="clientId" class="form-control" formControlName="clientId">
+          <option value="">{{"Selecciona un client" | translate}}</option>
+          <option *ngFor="let client of clients" [value]="client.clientId">{{ client.nom }}</option>
+        </select>
+      </div>
       <button type="submit" class="btn btn-primary">{{"Crear Projecte" | translate}}</button>
       <button class="btn btn-secondary ms-2" [routerLink]="['/empresa', empresaId, 'projecte']">{{"Cancel·lar" | translate}}</button>
     </form>

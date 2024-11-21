@@ -1,16 +1,19 @@
 package com.joelblanc.AppEcityclic;
 
 import com.joelblanc.AppEcityclic.entity.Empresa;
+import com.joelblanc.AppEcityclic.entity.UserEntity;
+import com.joelblanc.AppEcityclic.repository.UserRepository;
 import com.joelblanc.AppEcityclic.service.EmpresaService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class DataInitializer {
 
     @Bean
-    public CommandLineRunner initData(EmpresaService empresaService) {
+    public CommandLineRunner initData(EmpresaService empresaService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             Empresa empresa1 = new Empresa();
             empresa1.setNom("Empresa 1");
@@ -24,6 +27,13 @@ public class DataInitializer {
 
             empresaService.save(empresa1);
             empresaService.save(empresa2);
+
+            // Crear un usuari
+            UserEntity admin = new UserEntity();
+            admin.setUsername("admin");
+            admin.setPassword(passwordEncoder.encode("password"));
+
+            userRepository.save(admin);
         };
     }
 }

@@ -53,8 +53,11 @@
   "Pendent": "Pendent",
   "En Progres": "En Progres",
   "Finalitzada": "Finalitzada",
+  "Tornar enrere": "Tornar enrere",
   "Llistat de Clients del Projecte": "Llistat de Clients del Projecte",
   "Crear nou client per al projecte": "Crear nou client per al projecte",
   "Crear nou client": "Crear nou client",
-  "Actualitzar client": "Actualitzar client"
+  "Actualitzar client": "Actualitzar client",
+  "Introdueix el teu usuari": "Introdueix el teu usuari",
+  "Introdueix la teva contrasenya": "Introdueix la teva contrasenya"
 }

@@ -15,11 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/client")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:4200/")
 public class ClientController {
 
     private final ClientService clientService;
     private final ProjecteService projecteService;
+
+    @GetMapping()
+    public ResponseEntity<List<Client>> getAllClients() {
+        List<Client> clients = clientService.findAll();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
 
     // Obtenir tots els clients d'un projecte
     @GetMapping("/{projecteId}")

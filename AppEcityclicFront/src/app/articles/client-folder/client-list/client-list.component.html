@@ -1,6 +1,7 @@
 <div class="container mt-5">
   <div class="client-list">
     <div class="d-flex justify-content-between align-items-center mb-3">
+      <button class="btn btn-secondary me-2" (click)="goBack()">{{"Tornar enrere" | translate}}</button>
       <h2>{{"Llistat de Clients del Projecte" | translate}}</h2>
       <button class="btn btn-primary "
         [routerLink]="['/projecte', projecteId, 'client', 'create']">{{"Afegir Client" | translate}}</button>

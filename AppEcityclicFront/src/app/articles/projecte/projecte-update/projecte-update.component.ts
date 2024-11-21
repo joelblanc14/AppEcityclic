@@ -6,6 +6,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TranslateModule } from '@ngx-translate/core';
+import { Client } from '../../../models/client.interface';
+import { ClientService } from '../../../services/client.service';
 @Component({
   selector: 'app-projecte-update',
   standalone: true,
@@ -18,10 +20,12 @@ export class ProjecteUpdateComponent implements OnInit{
   public projecteForm: FormGroup;
   public empresaId!: number;
   public projecteId!: number;
+  public clients: Client[] = [];
 
   constructor(
     private fb: FormBuilder,
     private projecteService: ProjecteService,
+    private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
@@ -36,6 +40,9 @@ export class ProjecteUpdateComponent implements OnInit{
   ngOnInit(): void {
     this.empresaId = +this.route.snapshot.paramMap.get('empresaId')!;
     this.projecteId = +this.route.snapshot.paramMap.get('projecteId')!;
+    this.clientService.getAllClients().subscribe(clients => {
+      this.clients = clients;
+    });
     this.getProjectes();
   }
 
