@@ -2,7 +2,6 @@ package com.joelblanc.AppEcityclic.controller;
 
 import com.joelblanc.AppEcityclic.dto.AuthRequest;
 import com.joelblanc.AppEcityclic.dto.AuthResponse;
-import com.joelblanc.AppEcityclic.entity.UserEntity;
 import com.joelblanc.AppEcityclic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

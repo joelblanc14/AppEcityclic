@@ -17,10 +17,10 @@ public class Tasca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tascaId;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String nom;
 
-    @Column(nullable = false)
+    @Column
     private String descripcio;
 
     @ManyToOne

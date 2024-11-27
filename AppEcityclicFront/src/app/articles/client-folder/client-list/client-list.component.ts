@@ -97,8 +97,4 @@ export class ClientListComponent  implements OnInit{
 
       this.snackBar.open(`${emoji} ${message}`, 'Okay', config);
     }
-
-    goBack(): void {
-      this.location.back();
-    }
 }

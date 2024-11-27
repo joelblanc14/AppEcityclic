@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class TascaService {
-  private apiUrl = `http://${environment.apiUrl}/api/empresa`;
+  private apiUrl = `${environment.apiUrl}/api/empresa`;
 
   constructor(private http: HttpClient) { }
 

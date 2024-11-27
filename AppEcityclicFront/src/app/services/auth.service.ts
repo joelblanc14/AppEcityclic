@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -8,26 +8,28 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
 
-  private apiUrl = `http://${environment.apiUrl}/api/auth/login`;
+  private apiUrl = `${environment.apiUrl}/api/auth/login`;
   private token: string | null = null;
 
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password });
+    return this.http.post<{ token: string }>(this.apiUrl, { username, password }).pipe(
+      tap(response => {
+        this.setToken(response.token);
+      })
+    );
   }
 
   setToken(token: string): void {
     this.token = token;
-    sessionStorage.setItem('authToken', token);
+    localStorage.setItem('authToken', token);
   }
 
   getToken(): string | null {
-    return this.token || sessionStorage.getItem('authToken');
-  }
-
-  isAuthenticated(): boolean {
-    return !!sessionStorage.getItem('authToken');
+    const token = this.token || localStorage.getItem('authToken');
+    console.log('Retrieved token:', token);
+    return token;
   }
 
   logout(): void {

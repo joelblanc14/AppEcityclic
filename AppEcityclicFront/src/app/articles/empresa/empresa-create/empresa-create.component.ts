@@ -6,7 +6,7 @@ import { Empresa } from '../../../models/empresa.interface';
 import { CommonModule } from '@angular/common';
 import { cifValidator } from '../../../shared/validators/cif.validator';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-empresa-create',
   standalone: true,
@@ -34,7 +34,7 @@ export class EmpresaCreateComponent {
     if (this.empresaForm.valid) {
       const novaEmpresa: Empresa = this.empresaForm.value;
       this.empresaService.createEmpresa(novaEmpresa).subscribe(() => {
-        this.router.navigate(['/empreses']);
+        this.router.navigate(['/empresa']);
         this.openSnackBar('Empresa creada correctament!', 'create-snackbar');
       });
     } else {

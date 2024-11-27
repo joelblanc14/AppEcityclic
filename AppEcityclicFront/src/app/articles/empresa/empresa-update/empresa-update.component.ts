@@ -49,7 +49,7 @@ export class EmpresaUpdateComponent implements OnInit{
     if (this.empresaForm.valid) {
       const updatedEmpresa: Empresa = {...this.empresaForm.value, empresaId: this.empresaId};
       this.empresaService.updateEmpresa(updatedEmpresa, this.empresaId).subscribe(() => {
-        this.router.navigate(['/empreses'])
+        this.router.navigate(['/empresa'])
         this.openSnackBar('Empresa actualizada correctament!', 'update-snackbar');
       })
     } else {

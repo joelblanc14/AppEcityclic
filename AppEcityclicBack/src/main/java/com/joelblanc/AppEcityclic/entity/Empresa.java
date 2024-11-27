@@ -25,7 +25,7 @@ public class Empresa {
     @Column(nullable = false)
     private String adreca;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cif;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
