@@ -1,6 +1,6 @@
 # Projecte AppEcityclic
 Aquest projecte és una aplicació composada per dos components principals:
-1. **Bakcend:** Un servidor creat amb Spring Boot que gestiona la lògica de negoci i la base de dades
+1. **Backend:** Un servidor creat amb Spring Boot que gestiona la lògica de negoci i la base de dades
 2. **Frontend:** Una aplicació Angular que proporciona una interfície d'usuari.
 
 ## Requisits prèvis
